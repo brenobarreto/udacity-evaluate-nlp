@@ -39,10 +39,9 @@ app.listen(3000, function () {
 
 
 // Function Get Sentiment
-const getSentiment = async () => {
+const getSentiment = async (tweet) => {
     return new Promise((resolve, reject) => {
-        let text = "Hello World"
-        fetch(`https://api.aylien.com/api/v1/sentiment?text=${text}&mode=tweet`, {
+        fetch(`https://api.aylien.com/api/v1/sentiment?text=${tweet}&mode=tweet`, {
         method: 'POST',
         headers: {
             'X-AYLIEN-TextAPI-Application-ID': process.env.AYLIEN_API_ID,
@@ -65,7 +64,7 @@ const getSentiment = async () => {
 
 
 app.post('/getSentiment', (req, res) => {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-    console.log(req.body);    
-    getSentiment().then( data => { return res.json(data) } );
+    console.log(req.body);
+    let tweet = req.body.value;
+    getSentiment(tweet).then( data => { return res.json(data) } );
 })
