@@ -1,3 +1,5 @@
+import { happy } from "./happy";
+
 function handleSubmit(event) {
     event.preventDefault()
 
@@ -18,6 +20,9 @@ function handleSubmit(event) {
         console.log(data);
         document.getElementById('results').innerHTML = 
             `Polarity: ${data.polarity} | Subjectivity: ${data.subjectivity}`;
+        if (data.polarity == 'positive'){
+            Client.happy();
+        }
     });
         
 }
