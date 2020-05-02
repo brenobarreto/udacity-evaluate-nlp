@@ -1,16 +1,15 @@
 function handleSubmit(event) {
     event.preventDefault()
 
-    // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    checkForName(formText)
-
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
+    console.log("::: Form Submitted :::");
+    fetch('http://localhost:3000/getSentiment')
     .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
-    })
+    .then(data => { 
+        console.log(data);
+        document.getElementById('results').innerHTML = 
+            `Polarity: ${data.polarity} | Subjectivity: ${data.subjectivity}`;
+    });
+        
 }
 
 export { handleSubmit }
