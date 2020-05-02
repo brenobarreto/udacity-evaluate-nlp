@@ -5,10 +5,15 @@ const fetch = require("node-fetch");
 
 var path = require('path')
 const express = require('express')
-// const getSentiment = require('./getSentiment.js')
+const bodyParser = require('body-parser');
+var cors = require('cors');
+
 var aylien = require("aylien_textapi");
 
-const app = express()
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(cors());
 
 app.use(express.static('dist'))
 
@@ -59,9 +64,8 @@ const getSentiment = async () => {
 }
 
 
-app.get('/getSentiment', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-
+app.post('/getSentiment', (req, res) => {
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    console.log(req.body);    
     getSentiment().then( data => { return res.json(data) } );
-
 })

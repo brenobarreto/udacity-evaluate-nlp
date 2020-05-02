@@ -1,8 +1,18 @@
 function handleSubmit(event) {
     event.preventDefault()
 
+    let tweet = {};
+    tweet.value = document.getElementById("tweet").value;
+    console.log(tweet);
+
     console.log("::: Form Submitted :::");
-    fetch('http://localhost:3000/getSentiment')
+    fetch('http://localhost:3000/getSentiment', {
+        method: "POST",
+        body: JSON.stringify(tweet),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
     .then(res => res.json())
     .then(data => { 
         console.log(data);
