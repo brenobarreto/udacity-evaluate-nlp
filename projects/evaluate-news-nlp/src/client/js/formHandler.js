@@ -21,8 +21,10 @@ function handleSubmit(event) {
         document.getElementById('results').innerHTML = 
             `Polarity: ${data.polarity} | Subjectivity: ${data.subjectivity}`;
         if (data.polarity == 'positive'){
-            Client.happy();
-        }
+            Client.happy('yes');
+        } else {
+            Client.happy('no')
+        };
     });
         
 }
